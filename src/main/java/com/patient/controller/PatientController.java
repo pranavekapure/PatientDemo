@@ -5,41 +5,43 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.patient.pojo.Patient;
-import com.patient.serviceiImpl.PatientServiceImpl;
+import com.patient.pojo.PatientDto;
+import com.patient.serviceImpl.PatientServiceImpl;
 
 @RestController
 @RequestMapping("/patient")
 public class PatientController {
 
 	@Autowired
-	PatientServiceImpl patientServiceImpl;
+	private PatientServiceImpl patientServiceImpl;
 
 	@RequestMapping(method = RequestMethod.GET, path = "/getPatientList")
-	public ResponseEntity<List<Patient>> getPatientInfo() {
+	public ResponseEntity<List<PatientDto>> getPatientInfo() {
 
-		return new ResponseEntity<List<Patient>>(patientServiceImpl.getPatientInfo(), HttpStatus.OK);
+		return new ResponseEntity<List<PatientDto>>(patientServiceImpl.getPatientInfo(), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/savePatient")
-	public ResponseEntity<Patient> saveOrUpdatePatientInfo(@RequestBody Patient patient) {
+	public ResponseEntity<PatientDto> saveOrUpdatePatientInfo(@RequestBody PatientDto patient) {
 
-		return new ResponseEntity<>(patientServiceImpl.saveOrUpdatePatientInfo(patient), HttpStatus.OK);
+		return new ResponseEntity<PatientDto>(patientServiceImpl.saveOrUpdatePatientInfo(patient), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, path = "/updatePatient")
-	public ResponseEntity<Patient> updatePatientInfo(@RequestBody Patient patient) {
+	public ResponseEntity<PatientDto> updatePatientInfo(@RequestBody PatientDto patient) {
 
-		return new ResponseEntity<>(patientServiceImpl.saveOrUpdatePatientInfo(patient), HttpStatus.OK);
+		return new ResponseEntity<PatientDto>(patientServiceImpl.saveOrUpdatePatientInfo(patient), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/getPatient/{id}")
-	public ResponseEntity<Patient> getPatient(Integer id) {
+	public ResponseEntity<Patient> getPatient(@PathVariable Integer id) {
 
 		return new ResponseEntity<>(patientServiceImpl.getPatient(id), HttpStatus.OK);
 	}
@@ -49,5 +51,5 @@ public class PatientController {
 
 		return new ResponseEntity<>(patientServiceImpl.deletePatient(id), HttpStatus.OK);
 	}
-	
+
 }

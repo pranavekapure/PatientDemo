@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.patient.pojo.Criteria;
 import com.patient.pojo.Patient;
-import com.patient.serviceiImpl.PatientServiceImpl;
+import com.patient.pojo.PatientDto;
+import com.patient.serviceImpl.PatientServiceImpl;
 
 @RestController
 @RequestMapping("/filter")
@@ -21,9 +22,9 @@ public class FilterController {
 	@Autowired
 	PatientServiceImpl patientServiceImpl;
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Set<Patient>> getFilteredPatients(@RequestBody Criteria filterCriteria){
+	public ResponseEntity<Set<PatientDto>> getFilteredPatients(@RequestBody Criteria filterCriteria){
 		
-		return new ResponseEntity<Set<Patient>>(patientServiceImpl.getFilteredPatients(filterCriteria), HttpStatus.OK);
+		return new ResponseEntity<Set<PatientDto>>(patientServiceImpl.getFilteredPatients(filterCriteria), HttpStatus.OK);
 	}
 
 }

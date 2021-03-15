@@ -1,15 +1,11 @@
 package com.patient.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.List;
 
-@Entity
-public class Patient {
+public class PatientDto  {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	private List<Medicine> medicineList;
+	
 	private Integer patientId;
 
 	private String firstName;
@@ -80,4 +76,12 @@ public class Patient {
 		this.treatmentLocation = treatmentLocation;
 	}
 
+	
+	public List<Medicine> getMedicineList() {
+		return medicineList;
+	}
+
+	public void setMedicineList(List<Medicine> medicineList) {
+		this.medicineList = medicineList;
+	}
 }
